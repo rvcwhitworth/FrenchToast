@@ -1,15 +1,18 @@
 const express = require('express');
+const socketRouter = require('./socketRouter.js')
 
 // const webpackDevMiddleware = require('webpack-dev-middleware');
 // const webpack = require('webpack');
 // const webpackConfig = require('./webpack.config.js');
 const app = express();
+const http = require('http').Server(app);
 const bodyParser = require('body-parser');
 // const compiler = webpack(webpackConfig);
 
 // app.use(express.static(__dirname + '/www'));
 app.use(bodyParser.json());
 
+module.exports.http = http
 
 
 const SmeeClient = require('smee-client')
@@ -36,11 +39,18 @@ const events = smee.start()
 // }));
 
 app.get('/events', (req, res) => {
+    //all our routing is here
+	//need to do a routing function here
 	console.log('we are in events/get', req.body)
+	socketRouter(req.body)
 })
 
 app.post('/events', (req, res) => {
+	//all our routing is herehuwf
+	//need to do a routing function here
 	console.log('we are in events/post', req.body)
+	socketRouter(req.body)
+
 })
 
   app.set('port', process.env.PORT || 3000)
