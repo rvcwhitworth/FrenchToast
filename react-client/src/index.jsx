@@ -139,12 +139,16 @@ class App extends React.Component {
           let targetColumn = target.dataset.status;
           let targetColumnArr = this.state[targetColumn];
           let sourceColumn = source.dataset.status;
+          console.log('target', target, 'source', source.dataset.status)
+
+
+          //NEED to get rid of state logic and rendering off that and now integrate with Github api and render off socket updates and such
 
           //get item
           let item = this.state[sourceColumn].filter(item => {
-            item.id == el.dataset.id;
+            return item.id == el.dataset.id;
           })[0];
-
+          console.log('what is item??', item)
           //get new source array after remove item
           let sourceColumnArr = this.state[sourceColumn].filter(
             item => item.id !== el.dataset.id
@@ -153,30 +157,31 @@ class App extends React.Component {
           //add item to targetArray
           targetColumnArr.push(item);
 
-          if (targetColumn !== sourceColumn) {
-            this.setState(
-              prevState => {
-                prevState[targetColumn] = targetColumnArr;
-                prevState[sourceColumn] = sourceColumnArr;
-                return prevState;
-              },
-              () => {
-                console.log("this.state after switch", this.state);
-              }
-            );
-            // this.setState(
-            //   prevState => {
-            //     prevState[targetColumn][el.dataset.id] =
-            //       prevState[sourceColumn][el.dataset.id];
-            //     // console.log("hmm", sourceColumn, el.dataset.id);
-            //     delete prevState[sourceColumn][el.dataset.id];
-            //     return prevState;
-            //   },
-            //   () => {
-            //     console.log("NEW STATE", this.state);
-            //   }
-            // );
-          }
+          // if (targetColumn !== sourceColumn) {
+          //   this.setState(
+          //     prevState => {
+          //       prevState[targetColumn] = targetColumnArr;
+          //       prevState[sourceColumn] = sourceColumnArr;
+          //       console.log('prevState', prevState)
+          //       return prevState;
+          //     },
+          //     () => {
+          //       console.log("this.state after switch", this.state);
+          //     }
+          //   );
+          //   // this.setState(
+          //   //   prevState => {
+          //   //     prevState[targetColumn][el.dataset.id] =
+          //   //       prevState[sourceColumn][el.dataset.id];
+          //   //     // console.log("hmm", sourceColumn, el.dataset.id);
+          //   //     delete prevState[sourceColumn][el.dataset.id];
+          //   //     return prevState;
+          //   //   },
+          //   //   () => {
+          //   //     console.log("NEW STATE", this.state);
+          //   //   }
+          //   // );
+          // }
         });
       }
     );
