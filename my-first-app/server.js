@@ -38,6 +38,10 @@ const events = smee.start()
 //   historyApiFallback: true,
 // }));
 
+app.post('github/update', (req, res) => {
+  //do here what ever you want to update the gitHub repo here using the github api
+})
+
 app.get('/events', (req, res) => {
     //all our routing is here
 	//need to do a routing function here
